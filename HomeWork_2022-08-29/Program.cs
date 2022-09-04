@@ -57,7 +57,7 @@ Console.WriteLine ($"The sum of the digits of the number {number} is {FindSum(nu
 6, 1, 33 -> [6, 1, 33]
 Решение:
 */
-/*
+
 void Array (int size0)
 {
     int [] array = new int [size0];
@@ -77,4 +77,3 @@ void Array (int size0)
 Console.Write ("Input the size of the array: ");
 int size = Convert.ToInt32(Console.ReadLine());
 Array(size);
-*/
