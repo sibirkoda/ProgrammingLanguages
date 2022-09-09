@@ -7,7 +7,7 @@ m = 3, n = 4.
 8 7,8 -7,1 9
 */
 //Решение
-
+/*
 double [,] Create2dArray() //Метод создания двумерного массива m*n с нулевыми элементами размером 
 {
 Console.WriteLine("To create an array of a given dimension, input:");
@@ -46,30 +46,7 @@ double [,] Fil2dArray (double [,] array) //Заполнение двумерно
     return array;
 }
 
-//Создание трехмерного массива m*n*1 из двумерного массива m*n, 
-//где третья размерность - соответствует разрядности элемента
-
-double [,,] Create3dArray(double [,] array)//[,,1] - число знаков ДО запятой, [,,2] - число знаков после запятой
-{
-    double [,,] array3d = new double [array.GetLength(0), array.GetLength(1),3];
-    for (int i = 0; i < array.GetLength(0); i++)
-        for (int j = 0; j < array.GetLength(1); j++)
-            {
-                array3d[i,j,0] = array[i,j];
-                // число знаков после запятой
-                int index = 0;
-                while (array[i,j] * Math.Pow(10, 1 + index) % 10 != 0)
-                {
-                    index++;
-                }
-                array3d[i,j,1] = index;
-            }
-    return array3d;
-}
-
-
-//Печать двумерного массива
-void Print2dArray (double [,] array)
+void Print2dArray (double [,] array)//Печать двумерного массива
 {
     //определение максимальной разрядности элементов
     //int digitnumber = 1
@@ -80,25 +57,9 @@ void Print2dArray (double [,] array)
             Console.WriteLine();
         }
 }
-//Печать двумерного массива
 
-void Print3dArray (double [,,] array)
-{
-    //определение максимальной разрядности элементов
-    //int digitnumber = 1
-    for (int i = 0; i < array.GetLength(0); i++)
-        {
-            for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write($"{array[i,j,1]} ");
-            Console.WriteLine();
-        }
-}
-
-double [,] array2d = Fil2dArray(Create2dArray());
-Print2dArray(array2d);
-
-Print3dArray(Create3dArray(array2d));
-
+Print2dArray(Fil2dArray(Create2dArray()));
+*/
 
 
 /*
@@ -110,6 +71,67 @@ Print3dArray(Create3dArray(array2d));
 8 4 2 4
 17 -> такого числа в массиве нет
 */
+//Решение
+/*
+int [,] Create2dArray() //Метод создания двумерного массива m*n с нулевыми элементами размером 
+{
+Console.WriteLine("To create an array of a given dimension, input:");
+Console.Write("- number of rows: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.Write("- number of columns: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+int [,] array = new int [rows, columns];
+return array;
+}
+
+int [,] Fil2dArray (int [,] array) //Заполнение двумерного массива m*n случайными целыми числами
+{
+    Console.WriteLine("Define the range of values of the array elements: ");
+    Console.Write("- minimum value: ");
+    int minValue = Convert.ToInt32(Console.ReadLine());
+    Console.Write("- maximum value: ");
+    int maxValue = Convert.ToInt32(Console.ReadLine());
+        
+    for (int i = 0; i < array.GetLength(0); i++)
+        for (int j = 0; j < array.GetLength(1); j++)
+           array [i,j] = new Random().Next(minValue, maxValue);
+    return array;
+}
+
+void Print2dArray (int [,] array)//Печать двумерного массива
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write($"{array[i,j]} ");
+            Console.WriteLine();
+        }
+}
+
+void FindElement (int [,] array)
+{
+    Console.WriteLine("Input the row and column numbers of the array element you are looking for:");
+    Console.Write("- number of rows: ");
+    int rows = Convert.ToInt32(Console.ReadLine());
+    Console.Write("- number of columns: ");
+    int columns = Convert.ToInt32(Console.ReadLine());
+    
+    Console.WriteLine("In the array:");
+    Print2dArray(array);
+    
+    if (rows < array.GetLength(0)+1)
+        {
+            if (columns < array.GetLength(1)+1)
+            {
+                Console.WriteLine($"the element in row {rows} and column {columns} is {array[rows-1, columns-1]}");
+            }
+            else Console.WriteLine("element with such numbers does not exist");
+        }
+    else Console.WriteLine("element with such numbers does not exist");
+}
+
+FindElement(Fil2dArray(Create2dArray()));
+/*
 
 /*
 Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
@@ -118,4 +140,74 @@ Print3dArray(Create3dArray(array2d));
 5 9 2 3
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+*/
+//Решение:
+/*
+int [,] Create2dArray() //Метод создания двумерного массива m*n с нулевыми элементами размером 
+{
+Console.WriteLine("To create an array of a given dimension, input:");
+Console.Write("- number of rows: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.Write("- number of columns: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+int [,] array = new int [rows, columns];
+return array;
+}
+
+int [,] Fil2dArray (int [,] array) //Заполнение двумерного массива m*n случайными целыми числами
+{
+    Console.WriteLine("Define the range of values of the array elements: ");
+    Console.Write("- minimum value: ");
+    int minValue = Convert.ToInt32(Console.ReadLine());
+    Console.Write("- maximum value: ");
+    int maxValue = Convert.ToInt32(Console.ReadLine());
+        
+    for (int i = 0; i < array.GetLength(0); i++)
+        for (int j = 0; j < array.GetLength(1); j++)
+           array [i,j] = new Random().Next(minValue, maxValue);
+    return array;
+}
+
+double [] ArithMean (int [,] array2d)// заполнение одномерного массива значениями, равными ср. арифмет. от столбцов двумерного массива
+{
+    double [] arithmean = new double [array2d.GetLength(1)];
+    for (int j = 0; j < array2d.GetLength(1); j++)
+            {
+                double sum = 0;
+                for (int i=0; i < array2d.GetLength(0); i++)
+                {
+                    sum += array2d [i,j]; 
+                }
+                arithmean[j] = (double) sum / array2d.GetLength(0);
+            }
+    return arithmean;
+}
+
+void Print2dArray (int [,] array)//Печать двумерного массива
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write($"{array[i,j]} ");
+            Console.WriteLine();
+        }
+}
+
+void Print1dArray (double [] array)//печать одномерного массива
+{
+    Console.Write("(");
+    for (int i = 0; i < array.Length-1; i++)
+       {
+        Console.Write($"{Math.Round(array[i], 2)}; ");
+       }
+    Console.Write($"{Math.Round(array[array.Length-1], 2)})");
+    
+}
+
+int [,] array2d = Fil2dArray(Create2dArray());
+Console.WriteLine("In the array:");
+Print2dArray(array2d);
+double [] array1d = ArithMean(array2d);
+Console.Write("The arithmetic mean values of the columns are equal to: ");
+Print1dArray(array1d);
 */
