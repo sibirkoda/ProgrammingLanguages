@@ -7,19 +7,19 @@ m = 3, n = 4.
 8 7,8 -7,1 9
 */
 //Решение
-/*
-double [,] Create2dArray() //Метод создания двумерного массива m*n с нулевыми элементами 
+
+double[,] Create2dArray() //Метод создания двумерного массива m*n с нулевыми элементами 
 {
     Console.WriteLine("To create an array of a given dimension, input:");
     Console.Write("- number of rows: ");
     int rows = Convert.ToInt32(Console.ReadLine());
     Console.Write("- number of columns: ");
     int columns = Convert.ToInt32(Console.ReadLine());
-    double [,] array = new double [rows, columns];
+    double[,] array = new double[rows, columns];
     return array;
 }
 
-double [,] Fil2dArray (double [,] array) //Заполнение двумерного массива m*n случайными вещественными числами
+double[,] Fil2dArray(double[,] array) //Заполнение двумерного массива m*n случайными вещественными числами
 {
     Console.WriteLine("Define the range of values of the array elements: ");
     Console.Write("- minimum value: ");
@@ -28,36 +28,54 @@ double [,] Fil2dArray (double [,] array) //Заполнение двумерно
     int maxValue = Convert.ToInt32(Console.ReadLine());
     Console.Write("Input the number of digits after the decimal point in the values of the array elements: ");
     int numberdigit = Convert.ToInt32(Console.ReadLine());
-    
+
     for (int i = 0; i < array.GetLength(0); i++)//ниже определяем алгоритм, чтобы было нужно число знаков после запятой 
         for (int j = 0; j < array.GetLength(1); j++)
-           {
-                int min = minValue;
-                int max = maxValue;
-                int dec = 1;
-                for (int index = 0; index < numberdigit; index++)
-                {
-                    min = min * 10;
-                    max = max * 10;
-                    dec = dec * 10;
-                }
-                array [i,j] = (double) (new Random().Next(min, max)) / dec;
-           }
+        {
+            int min = minValue;
+            int max = maxValue;
+            int dec = 1;
+            for (int index = 0; index < numberdigit; index++)
+            {
+                min = min * 10;
+                max = max * 10;
+                dec = dec * 10;
+            }
+            array[i, j] = (double)(new Random().Next(min, max)) / dec;
+        }
     return array;
 }
 
-void Print2dArray (double [,] array)//Печать двумерного массива
+double[,] Fil2dArray2(double[,] array) //Заполнение двумерного массива m*n случайными вещественными числами
 {
+    Console.WriteLine("Define the range of values of the array elements: ");
+    Console.Write("- minimum value: ");
+    int minValue = Convert.ToInt32(Console.ReadLine());
+    Console.Write("- maximum value: ");
+    int maxValue = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input the number of digits after the decimal point in the values of the array elements: ");
+    int numberdigit = Convert.ToInt32(Console.ReadLine());
     for (int i = 0; i < array.GetLength(0); i++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write($"{array[i,j]} ");
-            Console.WriteLine();
+            array[i, j] = new Random().Next(minValue, maxValue) + Math.Round(new Random().NextDouble(),numberdigit);
         }
+    return array;
 }
 
-Print2dArray(Fil2dArray(Create2dArray()));
-*/
+
+void Print2dArray(double[,] array)//Печать двумерного массива
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write($"{array[i, j]} ");
+        Console.WriteLine();
+    }
+}
+
+Print2dArray(Fil2dArray2(Create2dArray()));
+
 
 
 /*
