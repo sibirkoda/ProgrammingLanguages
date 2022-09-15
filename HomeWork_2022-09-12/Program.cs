@@ -268,7 +268,7 @@ else
 
 Решение:
 */
-
+/*
 //Метод создания и заполнения трехмерного массива
 int[,,] Create3dArray()
 {
@@ -318,6 +318,7 @@ void Print3dArray(int[,,] array)
 
 int[,,] array3d = Create3dArray();
 Print3dArray(array3d);
+*/
 
 /*
 Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
@@ -326,35 +327,59 @@ Print3dArray(array3d);
 12 13 14 05
 11 16 15 06
 10 09 08 07
+
+Решение:
 */
 
 //Метод создания двумерного массива m*n с нулевыми значениями
-int[,] Create2dArray()  
+int[,] Create2dArray()
 {
     Console.WriteLine("To create an array of a given dimension, input:");
     Console.Write("- number of rows: ");
     int rows = Convert.ToInt32(Console.ReadLine());
     Console.Write("- number of columns: ");
     int columns = Convert.ToInt32(Console.ReadLine());
+
     int[,] array = new int[rows, columns];
     return array;
 }
 
-int[,] Fil2dArray(int [,] array)
+int[,] Fil2dArray(int[,] array)
 {
-    int count = 10;
+    int begin = 10;
+    int count = begin;
+    int digitelement = array.GetLength(0) * array.GetLength(1);
+    int i = 0;
+    int j = 0;
 
-    int [,] filarray = new int [array.GetLength(0), array.GetLength(1)];
-    filarray[0,0] = count;
+    while (count <= begin + digitelement)
+    {
+        while (array[i, j] == 0 && j < array.GetLength(1))
+        {
+            array[i, j] = count;
+            count++;
+            j++;
+        }
+        while (array[i+1, j] == 0 && i < array.GetLength(0))
+        {
+            array[i, j] = count;
+            count++;
+            i++;
+        }
+        while (array[i, j-1] == 0 && 0 <= j)
+        {
+            array[i, j] = count;
+            count++;
+            j--;
+        }
+        while (array[i-1, j] == 0 && 0 <= i)
+        {
+            array[i, j] = count;
+            count++;
+            i--;
+        }
+    }
 
-    int beginrows = 0;
-    int begincolumns =0;
-
-    int endrows = array.GetLength(0);
-    int endcolumns = array.GetLength(1);
-    
-    
-    
     return array;
 }
 
@@ -368,3 +393,7 @@ void Print2dArray(int[,] array)
         Console.WriteLine();
     }
 }
+
+int[,] array2d = Create2dArray();
+array2d = Fil2dArray(array2d);
+Print2dArray(array2d);
