@@ -69,7 +69,6 @@ int[,] SortingRows(int[,] array) // метод упорядочивания эл
     return array;
 }
 
-
 int[,] array = Create2dArray();
 Print2dArray(array);
 Console.WriteLine();
@@ -77,6 +76,9 @@ Console.WriteLine();
 Console.WriteLine("Sorted array in descending order is:");
 Print2dArray(SortingRows(array));
 */
+
+
+
 
 
 
@@ -164,6 +166,9 @@ Print2dArray(array);
 Console.WriteLine();
 NumberRows(array);
 */
+
+
+
 
 
 
@@ -317,8 +322,14 @@ void Print3dArray(int[,,] array)
 }
 
 int[,,] array3d = Create3dArray();
+Console.WriteLine();
+Console.WriteLine("Array is:");
 Print3dArray(array3d);
 */
+
+
+
+
 
 /*
 Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
@@ -330,7 +341,7 @@ Print3dArray(array3d);
 
 Решение:
 */
-
+/*
 //Метод создания двумерного массива m*n с нулевыми значениями
 int[,] Create2dArray()
 {
@@ -344,42 +355,44 @@ int[,] Create2dArray()
     return array;
 }
 
+//Метод заполнения двумерного массива m*n "по кругу"
 int[,] Fil2dArray(int[,] array)
 {
-    int begin = 10;
-    int count = begin;
+    int begin = 11;
+    int count = 0;
     int digitelement = array.GetLength(0) * array.GetLength(1);
     int i = 0;
     int j = 0;
 
-    while (count <= begin + digitelement)
+    array[i, j] = begin-1;
+
+    while (count + 1 < digitelement)
     {
-        while (array[i, j] == 0 && j < array.GetLength(1))
+        while (j + 1 < array.GetLength(1) && array[i, j + 1] == 0 && count + 1 < digitelement)
         {
-            array[i, j] = count;
-            count++;
             j++;
-        }
-        while (array[i+1, j] == 0 && i < array.GetLength(0))
-        {
-            array[i, j] = count;
+            array[i, j] = begin + count;
             count++;
+        }
+        while (i + 1 < array.GetLength(0) && array[i + 1, j] == 0 && count + 1 < digitelement)
+        {
             i++;
-        }
-        while (array[i, j-1] == 0 && 0 <= j)
-        {
-            array[i, j] = count;
+            array[i, j] = begin + count;
             count++;
+        }
+        while (0 <= j - 1 && array[i, j - 1] == 0 && count + 1 < digitelement)
+        {
             j--;
-        }
-        while (array[i-1, j] == 0 && 0 <= i)
-        {
-            array[i, j] = count;
+            array[i, j] = begin + count;
             count++;
+        }
+        while (0 <= i - 1 && array[i - 1, j] == 0 && count + 1 < digitelement)
+        {
             i--;
+            array[i, j] = begin + count;
+            count++;
         }
     }
-
     return array;
 }
 
@@ -396,4 +409,7 @@ void Print2dArray(int[,] array)
 
 int[,] array2d = Create2dArray();
 array2d = Fil2dArray(array2d);
+Console.WriteLine();
+Console.WriteLine("Filled array is:");
 Print2dArray(array2d);
+*/
